@@ -14,7 +14,12 @@ class Api extends Controller
     {
         // fatch all data from movies table with actor name and image
         $movies = Movies::with('actors')->get();
-        return response()->json($movies);
+        return
+        [
+            'status' => 200,
+            'message' => 'All Movies',
+            'data' => $movies
+        ];
     }
 
     public function store(Request $request)
@@ -37,7 +42,11 @@ class Api extends Controller
             $movies->year = $request->year;
             $movies->actor_id = $request->actor_id;
             $movies->save();
-            return response()->json($movies);
+            return [
+                'status' => 200,
+                'message' => 'Movie Added Successfully',
+                'data' => $movies
+            ];
         }
     }
 }
